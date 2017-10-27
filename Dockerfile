@@ -41,7 +41,7 @@ VOLUME /var/www/html
 ENV WORDPRESS_VERSION 4.8.2
 
 RUN set -ex; \
-	curl -o w.zip -fSL "http://172.16.10.40/w.zip"; \
+	curl -o w.zip -fSL "https://wordpress.org/latest.zip"; \
 	echo "---------------"; \
 	ls; \
 	pwd; \
