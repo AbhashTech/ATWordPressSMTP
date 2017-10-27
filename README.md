@@ -2,7 +2,7 @@
 
 [![N|Solid](https://s.w.org/about/images/logos/wordpress-logo-hoz-rgb.png)](https://wordpress.org)
 
-WordPress is a free and open source blogging tool and a content management system (CMS) based on PHP and MySQL, which runs on a web hosting service. Since official docker image of WordPress doesn't have option of sending email out of box, this repository come to existence.
+WordPress is a free and open source blogging tool and a content management system (CMS) based on PHP and MySQL, which runs on a web hosting service. Since official docker image of WordPress doesn't have option of sending email out of the box, this repository came into existence.
 
 ### How to use this image
 
