@@ -38,10 +38,10 @@ RUN a2enmod rewrite expires
 
 VOLUME /var/www/html
 
-ENV WORDPRESS_VERSION 4.8.2
+ENV WORDPRESS_VERSION 4.9.2
 
 RUN set -ex; \
-	curl -o w.zip -fSL "https://wordpress.org/latest.zip"; \
+	curl -o w.zip -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.zip"; \
 	echo "---------------"; \
 	ls; \
 	pwd; \
