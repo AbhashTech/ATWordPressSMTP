@@ -47,8 +47,9 @@ RUN set -ex; \
 # upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
 	tar -xzf wordpress.tar.gz -C /usr/src/; \
 	rm wordpress.tar.gz; \
-	chown -R www-data:www-data /usr/src/wordpress
-
+	chown -R www-data:www-data /usr/src/wordpress; \
+	usermod -u 1000 www-data
+#usermod option to match with default user on Linux system for fixing file permission issue
  
 COPY docker-entrypoint.sh /usr/local/bin/
 
