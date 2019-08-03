@@ -19,6 +19,8 @@ RUN set -ex; \
 		gd \
 		mysqli \
 		opcache \
+		sendmail sendmail-bin mailutils \
+		unzip \
 		zip \
 	; \
 	pecl install imagick-3.4.4; \
@@ -61,6 +63,12 @@ RUN { \
 		echo 'ignore_repeated_source = Off'; \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
+
+RUN { \
+	echo 'sendmail_path = /usr/sbin/sendmail -t -i'; \
+	echo 'SMTP = localhost'; \
+	echo 'smtp_port = 25'; \
+} > /usr/local/etc/php/conf.d/smtp.ini
 
 RUN a2enmod rewrite expires
 
