@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.1-apache
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
@@ -8,11 +8,12 @@ RUN set -ex; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 		libjpeg-dev \
-		libmagickwand-dev \
         	sendmail \
-        	sendmail-bin \
+		sendmail-bin \
         	mailutils \
 		unzip \
+		
+		libmagickwand-dev \
 		libpng-dev \
 	; \
 	\
@@ -66,7 +67,9 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
 
-    RUN { \
+RUN a2enmod rewrite expires
+
+RUN { \
 	echo 'sendmail_path = /usr/sbin/sendmail -t -i'; \
 	echo 'SMTP = localhost'; \
 	echo 'smtp_port = 25'; \
@@ -88,4 +91,4 @@ RUN set -ex; \
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
