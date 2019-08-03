@@ -6,7 +6,7 @@ WordPress is a free and open source blogging tool and a content management syste
 
 ### How to use this image
 
-    $ docker run --name some-wordpress --link some-mysql:mysql -d wordpress
+    $ docker run --name some-wordpress --link some-mysql:mysql -d kunalgautam/atwordpresssmtp
 
 The following environment variables are also honored for configuring your WordPress instance:
 
@@ -21,14 +21,14 @@ If the WORDPRESS_DB_NAME specified does not already exist on the given MySQL ser
 
 If you'd like to be able to access the instance from the host without the container's IP, standard port mappings can be used:
 
-    $ docker run --name some-wordpress --link some-mysql:mysql -p 8080:80 -d wordpress
+    $ docker run --name some-wordpress --link some-mysql:mysql -p 8080:80 -d kunalgautam/atwordpresssmtp
 
 Then, access it via http://localhost:8080 or http://host-ip:8080 in a browser.
 
 If you'd like to use an external database instead of a linked mysql container, specify the hostname and port with WORDPRESS_DB_HOST along with the password in WORDPRESS_DB_PASSWORD and the username in WORDPRESS_DB_USER (if it is something other than root):
 
     $ docker run --name some-wordpress -e WORDPRESS_DB_HOST=10.1.2.3:3306 \
-    -e WORDPRESS_DB_USER=... -e WORDPRESS_DB_PASSWORD=... -d wordpress
+    -e WORDPRESS_DB_USER=... -e WORDPRESS_DB_PASSWORD=... -d kunalgautam/atwordpresssmtp
 
 ### Via docker-compose
 
@@ -39,7 +39,7 @@ If you'd like to use an external database instead of a linked mysql container, s
     services:
     
       wordpress:
-        image: wordpress
+        image: kunalgautam/atwordpresssmtp
         restart: always
         ports:
           - 8080:80
