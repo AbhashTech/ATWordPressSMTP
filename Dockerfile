@@ -9,6 +9,10 @@ RUN set -ex; \
 	apt-get install -y --no-install-recommends \
 		libjpeg-dev \
 		libmagickwand-dev \
+        	sendmail \
+        	sendmail-bin \
+        	mailutils \
+		unzip \
 		libpng-dev \
 	; \
 	\
@@ -18,10 +22,6 @@ RUN set -ex; \
 		exif \
 		gd \
 		mysqli \
-        sendmail \
-        sendmail-bin \
-        mailutils \
-		unzip \
 		opcache \
 		zip \
 	; \
