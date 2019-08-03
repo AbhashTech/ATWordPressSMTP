@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.1-fpm
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
@@ -18,9 +18,11 @@ RUN set -ex; \
 		exif \
 		gd \
 		mysqli \
-		opcache \
-		sendmail sendmail-bin mailutils \
+        sendmail \
+        sendmail-bin \
+        mailutils \
 		unzip \
+		opcache \
 		zip \
 	; \
 	pecl install imagick-3.4.4; \
@@ -64,13 +66,11 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
 
-RUN { \
+    RUN { \
 	echo 'sendmail_path = /usr/sbin/sendmail -t -i'; \
 	echo 'SMTP = localhost'; \
 	echo 'smtp_port = 25'; \
 } > /usr/local/etc/php/conf.d/smtp.ini
-
-RUN a2enmod rewrite expires
 
 VOLUME /var/www/html
 
@@ -83,11 +83,9 @@ RUN set -ex; \
 # upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
 	tar -xzf wordpress.tar.gz -C /usr/src/; \
 	rm wordpress.tar.gz; \
-	chown -R www-data:www-data /usr/src/wordpress; \
-	usermod -u 1000 www-data
-#usermod option to match with default user on Linux system for fixing file permission issue
- 
+	chown -R www-data:www-data /usr/src/wordpress
+
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["php-fpm"]
